@@ -4,7 +4,7 @@ function submitData(name,email){
       'ConentTtype':'application/json',
       'Accept':'application/json'
     },
-    method:'post',
+    method:'POST',
     body:JSON.stringify({name:name,email:email})
   }
   return fetch(URL,requestOptions)
