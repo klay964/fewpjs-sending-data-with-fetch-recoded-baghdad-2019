@@ -1,16 +1,22 @@
-function submitData(name,email){
-  const requestOptions={
-    headers:{
-      'ConentTtype':'application/json',
-      'Accept':'application/json'
-    },
-    method:'POST',
-    body:JSON.stringify({name:name,email:email})
-  }
-  return fetch(URL,requestOptions)
+function submitData( name, email ) {
+  return fetch( 'http://localhost:3000/users', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify( {
+        name,
+        email
+      } )
+    } )
+    .then( function ( response ) {
+      return response.json()
+    } )
+    .then( function ( object ) {
+      document.body.innerHTML = object[ "id" ]
+    } )
+    .catch( function ( error ) {
+      document.body.innerHTML = error.message
+    } )
 }
-submitData("john","john@invisible.com").then(res =>{return res.json()})
-.then (json => {let elem=document.createElement("div")
-console.log(json.id)
-elem.innerHtml=json.id
-  document.body.appendChild(elem)}.catch(err=>{document.body.innerHTML=err.message})
